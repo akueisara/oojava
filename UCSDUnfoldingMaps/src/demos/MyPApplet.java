@@ -14,7 +14,7 @@ import processing.core.PImage;
 public class MyPApplet extends PApplet{
 	PImage img;
 	
-	public void setup() {
+	public void setup() { // execute only once
 		//Add setup code for MyPApplet
 		size(400,400);				//set canvas size
 		background(255);			//set canvas color
@@ -22,7 +22,7 @@ public class MyPApplet extends PApplet{
 		img = loadImage("palmTrees.jpg", "jpg");
 	}
 	
-	public void draw() {
+	public void draw() { // execute repeatedly
 		//Add drawing code for MyPApplet
 		img.resize(0, height);			//resize loaded image to full height of canvas
 		image(img, 0, 0);			//display image 

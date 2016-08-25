@@ -37,6 +37,7 @@ public class LifeExpectancy extends PApplet {
 
 		// Load lifeExpectancy data
 		lifeExpByCountry = loadLifeExpectancyFromCSV("LifeExpectancyWorldBankModule3.csv");
+//		lifeExpByCountry = loadLifeExpectancyFromCSV("LifeExpectancyWorldBankModule4.csv");
 		println("Loaded " + lifeExpByCountry.size() + " data entries");
 		
 
