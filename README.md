@@ -8,7 +8,7 @@ Assignments for Object Oriented Programming in Java on Coursera
 ## Week 2
 ### Programming Assignment for Module 3: Putting Data on a Map
 * [EarthquakeCityMap.java](https://github.com/akueisara/object-oriented-java/blob/master/UCSDUnfoldingMaps/src/module3/EarthquakeCityMap.java) </br>
-* 
+
 ## Week 3
 ### Programming Assignment for Module 4: Customizing Markers
 * [Module 4](https://github.com/akueisara/object-oriented-java/tree/master/UCSDUnfoldingMaps/src/module4) </br>
