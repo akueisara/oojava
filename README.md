@@ -17,3 +17,7 @@ Assignments for Object Oriented Programming in Java on Coursera
 ### Programming Assignment for Module 5: Responding to User Actions
 * [Module 5](https://github.com/akueisara/object-oriented-java/tree/master/UCSDUnfoldingMaps/src/module5) </br>
 
+## Week 5
+### Programming Assignment for Module 6: Sorting Data + Your Own Extension!
+* [Module 6](https://github.com/akueisara/object-oriented-java/tree/master/UCSDUnfoldingMaps/src/module6) </br>
+
