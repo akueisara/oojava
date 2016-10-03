@@ -2,6 +2,7 @@ package module6;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import de.fhpotsdam.unfolding.UnfoldingMap;
@@ -14,9 +15,12 @@ import de.fhpotsdam.unfolding.marker.Marker;
 import de.fhpotsdam.unfolding.marker.MultiMarker;
 import de.fhpotsdam.unfolding.providers.Google;
 import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
+import de.fhpotsdam.unfolding.providers.OpenStreetMap;
 import de.fhpotsdam.unfolding.utils.MapUtils;
+import demos.Airport;
 import parsing.ParseFeed;
 import processing.core.PApplet;
+import processing.core.PGraphics;
 
 /** EarthquakeCityMap
  * An application with an interactive map displaying earthquake data.
@@ -40,8 +44,6 @@ public class EarthquakeCityMap extends PApplet {
 	
 	/** This is where to find the local tiles, for working without an Internet connection */
 	public static String mbTilesString = "blankLight-1-3.mbtiles";
-	
-	
 
 	//feed with magnitude 2.5+ Earthquakes
 	private String earthquakesURL = "http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.atom";
@@ -73,7 +75,8 @@ public class EarthquakeCityMap extends PApplet {
 		    earthquakesURL = "2.5_week.atom";  // The same feed, but saved August 7, 2015
 		}
 		else {
-			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
+//			map = new UnfoldingMap(this, 200, 50, 650, 600, new Google.GoogleMapProvider());
+			map = new UnfoldingMap(this, 200, 50, 650, 600, new OpenStreetMap.OpenStreetMapProvider());
 			// IF YOU WANT TO TEST WITH A LOCAL FILE, uncomment the next line
 		    //earthquakesURL = "2.5_week.atom";
 		}
@@ -117,6 +120,8 @@ public class EarthquakeCityMap extends PApplet {
 
 	    // could be used for debugging
 	    printQuakes();
+	    
+	    sortAndPrint(20);
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
@@ -132,13 +137,29 @@ public class EarthquakeCityMap extends PApplet {
 		background(0);
 		map.draw();
 		addKey();
-		
 	}
 	
 	
-	// TODO: Add the method:
 	//   private void sortAndPrint(int numToPrint)
 	// and then call that method from setUp
+	private void sortAndPrint(int numToPrint) {
+		List<EarthquakeMarker> quakes = new ArrayList<EarthquakeMarker>();
+		for(Marker m: quakeMarkers) {
+			quakes.add((EarthquakeMarker) m);
+		}
+		Collections.sort(quakes);
+		if(numToPrint > quakes.size()) {
+			for (int i = 0; i< quakes.size(); i++) {
+				System.out.println(quakes.get(i));
+			}
+		}
+		else {
+			for (int i = 0; i< numToPrint; i++) {
+				System.out.println(quakes.get(i));
+			}
+		}
+			
+	}
 	
 	/** Event handler that gets called automatically when the 
 	 * mouse moves.
@@ -211,6 +232,10 @@ public class EarthquakeCityMap extends PApplet {
 					if (mhide != lastClicked) {
 						mhide.setHidden(true);
 					}
+					else {
+						fill(0, 0, 0);
+						rect(mouseX, mouseY, 55, 55);
+					}
 				}
 				for (Marker mhide : quakeMarkers) {
 					EarthquakeMarker quakeMarker = (EarthquakeMarker)mhide;
@@ -223,6 +248,11 @@ public class EarthquakeCityMap extends PApplet {
 			}
 		}		
 	}
+	
+	private void popMenu(float x, float y) {
+		
+	}
+
 	
 	// Helper method that will check if an earthquake marker was clicked on
 	// and respond appropriately
@@ -409,5 +439,7 @@ public class EarthquakeCityMap extends PApplet {
 		}
 		return false;
 	}
+	
+
 
 }
