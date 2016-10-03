@@ -54,7 +54,7 @@ public class CityMarker extends CommonMarker  {
 		pg.clear();
 		pg.pushStyle();
 		pg.fill(245, 241, 222);
-		pg.rect(x+15, y, pg.textWidth(title), 18);
+		pg.rect(x+17, y, pg.textWidth(title)+5, 18);
 		pg.fill(0);
 		pg.text(title, x+20, y+12);	
 		pg.popStyle();

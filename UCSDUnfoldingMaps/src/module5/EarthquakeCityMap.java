@@ -1,6 +1,7 @@
 package module5;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -18,6 +19,7 @@ import de.fhpotsdam.unfolding.providers.MBTilesMapProvider;
 import de.fhpotsdam.unfolding.providers.OpenStreetMap;
 import de.fhpotsdam.unfolding.utils.MapUtils;
 import de.fhpotsdam.unfolding.utils.ScreenPosition;
+import module6.EarthquakeMarker;
 import parsing.ParseFeed;
 import processing.core.PApplet;
 import processing.core.PGraphics;
@@ -133,6 +135,8 @@ public class EarthquakeCityMap extends PApplet {
 
 	    // could be used for debugging
 	    printQuakes();
+	    
+	    sortAndPrint(20);
 	 		
 	    // (3) Add markers to map
 	    //     NOTE: Country markers are not added to the map.  They are used
@@ -187,10 +191,27 @@ public class EarthquakeCityMap extends PApplet {
 		if(lastSelected !=null ){
 			lastSelected.drawTitleOnTop(buffer, mouseX, mouseY);
 		}
-		// fill(255,255,255);
-		// rect(100,100,25,25);
-		// fill(100,100,100);
-		// rect(100,150,25,25);
+	}
+	
+	//   private void sortAndPrint(int numToPrint)
+	// and then call that method from setUp
+	private void sortAndPrint(int numToPrint) {
+		List<EarthquakeMarker> quakes = new ArrayList<EarthquakeMarker>();
+		for(Marker m: quakeMarkers) {
+			quakes.add((EarthquakeMarker) m);
+		}
+		Collections.sort(quakes);
+		if(numToPrint > quakes.size()) {
+			for (int i = 0; i< quakes.size(); i++) {
+				System.out.println(quakes.get(i));
+			}
+		}
+		else {
+			for (int i = 0; i< numToPrint; i++) {
+				System.out.println(quakes.get(i));
+			}
+		}
+			
 	}
 
 	/** Event handler that gets called automatically when the 

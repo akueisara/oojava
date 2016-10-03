@@ -10,7 +10,7 @@ import processing.core.PGraphics;
  * @author Your name here
  *
  */
-public abstract class EarthquakeMarker extends CommonMarker
+public abstract class EarthquakeMarker extends CommonMarker implements Comparable<EarthquakeMarker>
 {
 	
 	// Did the earthquake occur on land?  This will be set by the subclasses.
@@ -55,6 +55,13 @@ public abstract class EarthquakeMarker extends CommonMarker
 		this.radius = 1.75f*getMagnitude();
 	}
 	
+	// public int compareTo(EarthquakeMarker marker)
+	@Override
+	public int compareTo(EarthquakeMarker marker) {
+		// reverse order
+		return Float.compare(marker.getMagnitude(), this.getMagnitude());
+	}
+	
 
 	// calls abstract method drawEarthquake and then checks age and draws X if needed
 	@Override
@@ -96,7 +103,7 @@ public abstract class EarthquakeMarker extends CommonMarker
 		pg.clear();
 		pg.pushStyle();
 		pg.fill(245, 241, 222);
-		pg.rect(x+15, y, pg.textWidth(title), 18);
+		pg.rect(x+17, y, pg.textWidth(title)+5, 18);
 		pg.fill(0);
 		pg.text(title, x+20, y+12);	
 		pg.popStyle();
@@ -132,6 +139,15 @@ public abstract class EarthquakeMarker extends CommonMarker
 		}
 	}
 	
+	
+	/** toString
+	 * Returns an earthquake marker's string representation
+	 * @return the string representation of an earthquake marker.
+	 */
+	public String toString()
+	{
+		return getTitle();
+	}
 	
 	/*
 	 * getters for earthquake properties
